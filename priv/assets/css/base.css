@@ -1,0 +1,21 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+#logo {
+  block-size: 15vh;
+  padding: 1rem 0;
+  display: inline-block;
+
+  svg {
+    color: white;
+    fill: azure;
+    filter: drop-shadow(0 0 10px azure);
+  }
+}
+
+.max-width {
+  max-width: 60rem;
+  margin-inline: auto;
+}

@@ -14,6 +14,7 @@ defmodule EzeWorks.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {EzeWorks, []},
       extra_applications: [:logger]
     ]
   end
@@ -22,7 +23,8 @@ defmodule EzeWorks.MixProject do
   defp deps do
     [
       {:pile, "~> 0.1"},
-      {:bandit, "~> 1.0"}
+      {:bandit, "~> 1.0"},
+      {:mdex, "~> 0.1"}
     ]
   end
 end
