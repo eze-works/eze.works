@@ -6,19 +6,19 @@
 ]
 +++
 
-Whoever said "third time's the charm" was a prophet, because I have done it again: [implementing a thing three times](/posts/reflections-on-writing-3-parser-combinator-libraries") before being satisfied with the final result. This time it's a homegrown version of the popular neovim plugin [Telescope](https://github.com/nvim-telescope/telescope.nvim).
+Whoever said "third time's the charm" was a prophet, because I have done it again: [implementing a thing three times](/post/reflections-on-writing-3-parser-combinator-libraries") before being satisfied with the final result. This time it's a homegrown version of the popular neovim plugin [Telescope](https://github.com/nvim-telescope/telescope.nvim).
 
 _Attempt 1_: A floating window layout. I had not yet figured out how to do the preview.
 
-![first-attempt](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1704769020-0.png)
+![first-attempt](/assets/images/telescope-first-attempt.png)
 
 _Attempt 2_: A semi-floating layout (the search window is floating). I found an OK way to do previews.
 
-![second-attempt](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1704769068-0.png)
+![second-attempt](/assets/images/telescope-second-attempt.png)
 
 _Attempt 3 (aka the charm)_: A non-floating (sinking?) layout. Finally figured out how to have proper previews.
 
-![third-attempt](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1704769162-0.png)
+![third-attempt](/assets/images/telescope-third-attempt.png)
 
 This was part of a project to [re-write my neovim config without using any third-party plugins](https://gitlab.com/wake-sleeper/plugin-free-neovim). [Here is my old config](https://gitlab.com/wake-sleeper/dotfiles/-/blob/383833fca0011d6f9f85248a5ef66a1f104d4ae5/nvim/.config/nvim/init.lua) so you get an idea of what i was trying to replicate.
 

@@ -5,7 +5,7 @@
     labels: ["languages/zig"]
 ]
 +++
-From [Rust is hard](https://hirrolot.github.io/posts/rust-is-hard-or-the-misery-of-mainstream-programming.html#): 
+From [Rust is hard](https://hirrolot.github.io/post/rust-is-hard-or-the-misery-of-mainstream-programming.html#): 
 
 > When you use Rust, it is sometimes outright preposterous how much knowledge of language, and how much of programming ingenuity and curiosity you need in order to accomplish the most trivial things. When you feel particularly desperate, you go to rust/issues and search for a solution for your problem. Suddenly, you find an issue with an explanation that it is theoretically impossible to design your API in this way, owing to some subtle language bug. The issue is Open and dated Apr 5, 2017.
 

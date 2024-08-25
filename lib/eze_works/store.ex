@@ -3,7 +3,7 @@ defmodule EzeWorks.Store do
   Post storage
 
   Posts are loaded up into an `Agent` process when the application stores.
-  The in memory state of the agent is defined by this [struct](t:EzeWorks.Store.t/0)
+  The in-memory state of the agent is defined by this [struct](t:EzeWorks.Store.t/0)
   """
 
   @typedoc """

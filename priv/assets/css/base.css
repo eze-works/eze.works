@@ -1,12 +1,128 @@
+/**
+ * DESIGN SYSTEM
+ */
+:root {
+  /* Typography scale */
+  --fs-small: 0.90rem;
+  --fs-6: clamp(1rem, 0vi + 1rem, 1rem);
+  --fs-5: clamp(1.25rem, 0.15vi + 1.21rem, 1.33rem);
+  --fs-4: clamp(1.56rem, 0.37vi + 1.47rem, 1.77rem);
+  --fs-3: clamp(1.95rem, 0.73vi + 1.77rem, 2.35rem);
+  --fs-2: clamp(2.44rem, 1.25vi + 2.13rem, 3.13rem);
+  --fs-1: clamp(3.05rem, 2.02vi + 2.55rem, 4.16rem);
+
+
+  /* Colors */
+  --color-primary-1: #B23C00;
+  --color-primary-2: #FF5600;
+  --color-primary-3: #FFA375;
+
+  --color-secondary-1: #403900;
+  --color-secondary-2: #8E7F00;
+  --color-secondary-3: #C4B115;
+  --color-secondary-4: #ECDB4D;
+  --color-secondary-5: #FFF5A3;
+
+  --color-gray-1: #2A2A2E;
+  --color-gray-2: #5D5D63;
+  --color-gray-3: #81808B;
+  --color-gray-4: #A6A5B3;
+  --color-gray-5: #CECDDB;
+
+  --color-bg: #ffffff;
+  --color-fg: #1c1c1c;
+}
+
 body {
-  background-color: black;
-  color: white;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 18px;
+  line-height: 1.75;
+
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: var(--fs-1);
+}
+
+h2 {
+  font-size: var(--fs-2);
+}
+
+h3 {
+  font-size: var(--fs-3);
+}
+
+h4 {
+  font-size: var(--fs-4);
+}
+
+h5 {
+  font-size: var(--fs-5);
+}
+
+h6 {
+  font-size: var(--fs-6);
+}
+
+/**
+ * ELEMENTS
+ */
+
+a {
+  color: var(--color-secondary-4);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+
+  &:visited {
+    color: var(--color-secondary-2);
+  }
+}
+
+.label {
+  all: unset;
+  color: var(--color-gray-5);
+  cursor: pointer;
+  font-size: var(--fs-small);
+  border: 1px solid var(--color-gray-5);
+  border-radius: 4px;
+  padding: 0.15rem 0.25rem;
+
+  &:visited {
+    color: var(--color-gray-3);
+    border: 1px solid var(--color-gray-3);
+  }
+}
+
+
+
+/**
+ * ALL OTHER STYLES GO HERE
+ */
+
+#content {
+  max-width: 85ch;
+  margin-inline: auto;
 }
 
 #logo {
-  block-size: 15vh;
-  padding: 1rem 0;
-  display: inline-block;
+  /* Sizes the logo based on viewport height so as not to take too much vertical real estate */
+  width: 100%;
+  block-size: 20vh;
+  padding: 1rem;
+  margin-block-end: 3rem;
+  display: block;
 
   svg {
     color: white;
@@ -15,7 +131,83 @@ body {
   }
 }
 
-.max-width {
-  max-width: 60rem;
+nav {
+  font-size: var(--fs-5);
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+footer {
+  line-height: 2;
+  font-size: var(--fs-small);
+  margin-block-start: 5rem;
+  padding: 1rem 0;
+}
+
+main {
+  max-width: 65ch;
   margin-inline: auto;
+}
+
+.post__date {
+  margin-block: 1rem;
+  font-style: italic;
+}
+
+.post__content {
+  &>p+p {
+    margin-block-start: 2rem;
+
+  }
+
+  img {
+    margin-block: 0.75rem;
+  }
+
+  pre,
+  code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.9rem;
+  }
+
+  :not(pre)>code {
+    font-size: 0.8em;
+    color: var(--color-primary-3);
+  }
+
+  pre:has(> code) {
+    overflow: scroll;
+    padding: 0.5rem 2rem;
+    margin-block: 0.75rem;
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 2rem;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block: 3rem;
+  }
+
+  .footnotes {
+    margin-block-start: 5rem;
+    font-size: var(--fs-small);
+    line-height: 1.25;
+  }
 }

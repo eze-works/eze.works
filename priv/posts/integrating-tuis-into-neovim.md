@@ -5,7 +5,7 @@
     labels: ["editors/neovim"]
 ]
 +++
-At the end of my [previous post](/posts/a-neovim-directory-browser-from-scratch), I pointed out potential improvements to be made to my lua directory browser. None of those came to fruition, but not due to lack of effort.
+At the end of my [previous post](/post/a-neovim-directory-browser-from-scratch), I pointed out potential improvements to be made to my lua directory browser. None of those came to fruition, but not due to lack of effort.
 
 I was hoping to re-create something like what [oil.nvim](https://github.com/stevearc/oil.nvim) does where you can edit your directory like you would edit a regular buffer.
 I wanted it to work cleanly without any possibility for messing up the buffer. In `oil.nvim` you can get the directory buffer into a unreadable state by shifting any line over (`>>`) then modifying the line ids that appear on the left. Attempting to save will now throw an error. This doesn't sit right with me because I expect user interfaces to be "tamper-proof". But no matter how hard I tried, I could not find a way to make a regular buffer behave like a tamper-proof user interface.
@@ -32,7 +32,7 @@ This uses Neovim's remote feature to forward an Ex command to a running Neovim p
 
 Here is a diagram:
 
-![Eze's blog](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1706889469-0.png)
+![Eze's blog](/assets/images/neovim-remote-diagram.png)
 
 
 ## Always start terminal mode in insert mode
@@ -68,10 +68,10 @@ The combination of these techniques has allowed me to seamlessly use `lf` and `l
 
 
 _`lf` integration:_
-![lf-integration](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1706889629-0.png)
+![lf-integration](/assets/images/neovim-lf-integration.png)
 
 _`lazygit` integration:_
-![lazy-git-integration](https://bear-images.sfo2.cdn.digitaloceanspaces.com/eze-1706889645-0.png)
+![lazy-git-integration](/assets/images/neovim-lazygit-integration.png)
 
 
 [^1]: `core.startinsert()` is just a wrapper for `vim.schedule(function() vim.cmd("startinsert")end)`. I have generally found that `:startinsert` just doesn't seem to work sometimes unless you defer it. I have no idea why :/

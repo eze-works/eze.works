@@ -22,7 +22,8 @@ defmodule EzeWorks.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:pile, "~> 0.1"},
+      # {:pile, "~> 0.1"},
+      {:pile, path: "../pile"},
       {:bandit, "~> 1.0"},
       {:mdex, "~> 0.1"}
     ]

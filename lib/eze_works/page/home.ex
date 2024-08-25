@@ -5,14 +5,17 @@ defmodule EzeWorks.Page.Home do
     EzeWorks.Page.base(
       {:ul,
        Enum.map(posts, fn post ->
-         {:li,
-          [
-            {:a, %{href: "/post/#{post.slug}"}, post.title},
-            Enum.map(post.labels, fn label ->
-              {:a, %{href: "/label/#{label}", style: "display: inline-block; padding: 1rem"},
-               label}
-            end)
-          ]}
+         {
+           :li,
+           {:a, %{href: "/post/#{post.slug}"}, post.title},
+           Enum.map(post.labels, fn label ->
+             {
+               :a,
+               %{href: "/label/#{label}", class: "label"},
+               label
+             }
+           end)
+         }
        end)}
     )
   end

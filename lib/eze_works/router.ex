@@ -24,7 +24,7 @@ defmodule EzeWorks.Router do
   end
 
   def render_page(conn, module, opts \\ %{}) do
-    html = module.page(opts) |> Pile.to_html()
+    html = module.page(opts) |> Pile.to_html(doctype: true, iodata: true)
     conn = put_resp_content_type(conn, "text/html")
     send_resp(conn, 200, html)
   end
