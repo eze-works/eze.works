@@ -1,12 +1,8 @@
 defmodule EzeWorks.PageHandler do
   def home(%{posts: posts}) do
     base_layout([
-      {:div, %{class: "post-search"}, {:input, %{placeholder: "Filter posts", type: "search"}}},
-      {
-        :div,
-        %{class: "post-list"},
-        Enum.map(posts, &post_card/1)
-      }
+      {:div, %{class: "featured-quote"}, featured_quote()},
+      {:div, %{class: "post-list"}, Enum.map(posts, &post_card/1)}
     ])
   end
 
@@ -15,13 +11,21 @@ defmodule EzeWorks.PageHandler do
       :div,
       %{class: "post-card"},
       {:a, %{class: "post-card-title", href: "/post/#{post.slug}"}, post.title},
-      {:span, %{class: "post-card-labels"}, Enum.map(post.labels, &label/1)},
-      {:span, %{class: "post-card-date"}, Calendar.strftime(post.date, "%b %d, %Y")}
+      {:span, %{class: "post-card-date"}, Calendar.strftime(post.date, "%b %d, %Y")},
+      {:span, %{class: "post-card-labels"}, Enum.map(post.labels, &label/1)}
     }
   end
 
   defp label(label) do
-    {:a, %{class: "post-label", href: "/label/#{label}"}, label}
+    {:span, %{class: "post-label"}, label}
+  end
+
+  defp featured_quote() do
+    [
+      {:p,
+       "We build our computers the way we build our cities – over time, without a plan, on top of ruins."},
+      {:p, "– Ellen Ullman, Life in Code"},
+    ]
   end
 
   def single_post(%{post: post} = ctx) do

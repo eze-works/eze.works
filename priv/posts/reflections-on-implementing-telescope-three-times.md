@@ -1,6 +1,6 @@
 +++
 [
-    title: "Reflections on implementing a homemade Telescope/fuzzy finder (3 times)",
+    title: "Implementing a neovim fuzzy finder",
     date: ~D(2024-01-07),
     labels: ["neovim"],
 ]

@@ -2,7 +2,7 @@
 [
     title: "HTTP Headers are dark and full of terrors",
     date: ~D(2023-12-20),
-    labels: ["http-protocol"],
+    labels: ["http"],
 ]
 +++
 As is expected from a naive software person fully on-board the Not Invented Here train, I am attempting to implement the [http/1.1](https://httpwg.org/specs/rfc9112.html) spec so I can finally get to writing web applications and services (naturally, i had to write [my own parser first](https://mistlenote.com/reflections-on-writing-3-parser-combinator-libraries/)). So far, parsing HTTP headers has been the most troublesome part of the process.

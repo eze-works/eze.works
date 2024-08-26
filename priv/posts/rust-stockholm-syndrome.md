@@ -2,7 +2,7 @@
 [
     title: "Rust Stockholm Syndrome",
     date: ~D(2023-10-04),
-    labels: ["rust-lang"],
+    labels: ["rust"],
 ]
 +++
 I am at a point where I feel comfortable reading and writing [rust](https://www.rust-lang.org/) code. It _is_ a peculiar type of comfort though, verging on [Stockholm syndrome](https://en.wikipedia.org/wiki/Stockholm_syndrome). The emotional instability it causes me is baffling. One minute, I am prancing about because of a solution I was able to write using the language's constructs ([ControlFlow](https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html) anyone?). The next, progress seems so hopeless that I am actively considering picking up another language so I can get actual work done instead of horsing around with the borrow checker. Lifetimes take my mind hostage. The language throws wrenches into my API design. But I always come back.

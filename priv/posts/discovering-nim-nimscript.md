@@ -2,7 +2,7 @@
 [
     title: "Discovering Nim: NimScript",
     date: ~D(2024-05-13),
-    labels: ["nim-lang"]
+    labels: ["nim"]
 ]
 +++
 It feels like the [Nim](https://nim-lang.org/) is a hidden gem of a programming language. And within this hidden gem lies another hidden gem, [`NimScript`](https://nim-lang.org/docs/nims.html). I figured I'd write about it in order to understand it better.
