@@ -1,83 +1,43 @@
 defmodule EzeWorks.Store do
   @moduledoc """
-  Post storage
-
-  Posts are loaded up into an `Agent` process when the application stores.
-  The in-memory state of the agent is defined by this [struct](t:EzeWorks.Store.t/0)
+  Post storage using ets tables
   """
-
-  @typedoc """
-  A post index.
-
-  The actual posts as values under the `by_slug` attributes.
-  All other attributes store slugs. 
-  """
-  @type t :: %__MODULE__{
-          by_slug: %{String.t() => %EzeWorks.Post{}},
-          by_label: %{[String.t()] => [String.t()]}
-        }
-
-  defstruct by_slug: %{}, by_label: %{}
-
-  use Agent
+  use GenServer
 
   def start_link(posts) do
-    Agent.start_link(fn -> init(posts) end, name: __MODULE__)
+    GenServer.start_link(__MODULE__, posts)
   end
 
-  defp init(posts) do
-    store = %__MODULE__{
-      by_slug: %{},
-      by_label: %{}
-    }
-
-    store = Enum.reduce(posts, store, &add_post_to_store/2)
-    store
+  @impl true
+  def init(posts) do
+    # this table stores posts keyed by their slug. so it's 1:1
+    :ets.new(:by_slug, [:named_table, {:read_concurrency, true}])
+    # this table stores posts keyed by label, so it's 1:many
+    :ets.new(:by_label, [:bag, :named_table, {:read_concurrency, true}])
+    {:ok, posts, {:continue, :load_posts}}
   end
 
-  defp add_post_to_store(%EzeWorks.Post{} = post, %EzeWorks.Store{} = store) do
-    # Store the post in a map, keyed by the slug
-    # One post per slug
-    slug_store = Map.put_new(store.by_slug, post.slug, post)
+  @impl true
+  def handle_continue(:load_posts, posts) do
+    for post <- posts do
+      :ets.insert(:by_slug, {post.slug, post})
 
-    # Store slugs in a map keyed by labels
-    # Multiple posts per label
-    post_labels = Enum.map(post.labels, fn l -> String.split(l, "/", trim: true) end)
+      for label <- post.labels do
+        :ets.insert(:by_label, {label, post})
+      end
+    end
 
-    label_store =
-      Enum.reduce(post_labels, store.by_label, fn label, label_store ->
-        Map.update(label_store, label, [post.slug], fn existing -> [post.slug | existing] end)
-      end)
-
-    # Update the store
-    %{store | by_slug: slug_store, by_label: label_store}
+    {:noreply, []}
   end
 
-  def list_posts() do
-    Agent.get(__MODULE__, fn store ->
-      store.by_slug
-      |> Map.values()
-      |> Enum.sort_by(fn post -> post.date end, {:desc, Date})
-    end)
+  def get_posts() do
+    :ets.tab2list(:by_slug) |> Enum.map(fn {_key, value} -> value end)
   end
 
-  def fetch_by_slug(slug) do
-    filtered = Agent.get(__MODULE__, fn store -> store_filter_by_slugs(store, [slug]) end)
-    Map.fetch(filtered, slug)
-  end
-
-  def fetch_label_hierarchy(label) do
-    Agent.get(__MODULE__, fn store -> store_filter_by_label(store, label) end)
-  end
-
-  defp store_filter_by_slugs(store, slugs) do
-    store.by_slug
-    |> Map.filter(fn {slug, _} -> Enum.member?(slugs, slug) end)
-  end
-
-  defp store_filter_by_label(store, label) do
-    store.by_label
-    |> Map.filter(fn {l, _} -> List.starts_with?(l, label) end)
-    |> Enum.map(fn {l, slugs} -> {l, store_filter_by_slugs(store, slugs) |> Map.values()} end)
+  def get_post(slug) do
+    case :ets.lookup(:by_slug, slug) do
+      [] -> :notfound
+      [{_key, value}] -> {:ok, value}
+    end
   end
 end

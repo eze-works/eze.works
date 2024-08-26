@@ -10,6 +10,6 @@ defmodule EzeWorks.Page.Label do
          end)}
       end)
 
-    EzeWorks.Page.base(html)
+    EzeWorks.Base.base(html)
   end
 end

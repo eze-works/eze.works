@@ -2,7 +2,7 @@
 [
     title: "Integrating TUIs into Neovim",
     date: ~D(2024-02-02),
-    labels: ["editors/neovim"]
+    labels: ["neovim"]
 ]
 +++
 At the end of my [previous post](/post/a-neovim-directory-browser-from-scratch), I pointed out potential improvements to be made to my lua directory browser. None of those came to fruition, but not due to lack of effort.

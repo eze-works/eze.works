@@ -2,7 +2,7 @@
 [
     title: "Reflections on implementing a homemade Telescope/fuzzy finder (3 times)",
     date: ~D(2024-01-07),
-    labels: ["editors/neovim"],
+    labels: ["neovim"],
 ]
 +++
 

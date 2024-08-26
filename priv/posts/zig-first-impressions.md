@@ -2,7 +2,7 @@
 [
     title: "Zig: First impressions",
     date: ~D(2023-10-18),
-    labels: ["languages/zig"]
+    labels: ["zig-lang"]
 ]
 +++
 From [Rust is hard](https://hirrolot.github.io/post/rust-is-hard-or-the-misery-of-mainstream-programming.html#): 

@@ -2,7 +2,7 @@
 [
     title: "Optimizing HTML images as a post-processing step",
     date: ~D(2024-03-30),
-    labels: ["languages/html"]
+    labels: ["html-lang"]
 ]
 +++
 I have been working on a new marketing site for my employer. The design includes a lot of high resolution image assets. To keep the site snappy, it's useful to avoid downloading huge images when not necessary. On a mobile phone for example, the image could be several time smaller without looking different to the human eye. The [standard approach](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images) to optimize images is to generate multiple versions of the image at different sizes, then use the image `srcset` attribute to tell the browser which version to load. These are called "responsive images".

@@ -2,7 +2,7 @@ defmodule EzeWorks.Page.Home do
   def page(_args) do
     posts = EzeWorks.Store.list_posts()
 
-    EzeWorks.Page.base(
+    EzeWorks.Base.base(
       {:ul,
        Enum.map(posts, fn post ->
          {
