@@ -23,7 +23,7 @@ defmodule EzeWorks.Router do
     render_404(conn)
   end
 
-  defp render_page(conn, page, opts \\ %{}) do
+  defp render_page(conn, page, opts) do
     html = apply(EzeWorks.PageHandler, page, [opts]) |> Pile.to_html(doctype: true, iodata: true)
     conn = put_resp_content_type(conn, "text/html")
     send_resp(conn, 200, html)

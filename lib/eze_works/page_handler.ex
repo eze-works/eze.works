@@ -24,11 +24,11 @@ defmodule EzeWorks.PageHandler do
     [
       {:p,
        "We build our computers the way we build our cities – over time, without a plan, on top of ruins."},
-      {:p, "– Ellen Ullman, Life in Code"},
+      {:p, "– Ellen Ullman, Life in Code"}
     ]
   end
 
-  def single_post(%{post: post} = ctx) do
+  def single_post(%{post: post}) do
     base_layout([
       {
         :div,
@@ -102,8 +102,6 @@ defmodule EzeWorks.PageHandler do
   end
 
   @license_link "https://creativecommons.org/licenses/by-sa/4.0/"
-  @icon_creator "https://thenounproject.com/creator/GreenHill/"
-  @icon_source "https://thenounproject.com/"
   defp footer() do
     {
       :footer,
