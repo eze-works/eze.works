@@ -11,7 +11,7 @@ defmodule EzeWorks do
   end
 
   defp get_posts() do
-    paths = Path.wildcard("priv/posts/*.md")
+    paths = Path.wildcard("#{:code.priv_dir(:eze_works)}/posts/*.md")
     paths |> Enum.map(&load_post/1)
   end
 
