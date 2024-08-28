@@ -1,4 +1,3 @@
-+++
 [
     title: "Discovering Nim: NimScript",
     date: ~D(2024-05-13),

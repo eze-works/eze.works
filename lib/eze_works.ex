@@ -18,7 +18,7 @@ defmodule EzeWorks do
   @metadata_fields [:title, :date, :labels, :stage]
   defp load_post(path) do
     {:ok, s} = :file.read_file(path, [:raw])
-    [_, meta, post_content] = String.split(s, "+++", parts: 3)
+    [meta, post_content] = String.split(s, "+++", parts: 2)
     {meta, _} = Code.eval_string(meta)
     meta = Keyword.validate!(meta, @metadata_fields)
     html = MDEx.to_html(post_content, extension: [footnotes: true])

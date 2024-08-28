@@ -1,4 +1,3 @@
-+++
 [
     title: "Integrating TUIs into Neovim",
     date: ~D(2024-02-02),

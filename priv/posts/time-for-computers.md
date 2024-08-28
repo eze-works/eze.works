@@ -1,4 +1,3 @@
-+++
 [
     title: "Time for Computers",
     date: ~D(2023-11-04),

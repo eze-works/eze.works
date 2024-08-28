@@ -1,4 +1,3 @@
-+++
 [
     title: "HTTP Headers are dark and full of terrors",
     date: ~D(2023-12-20),

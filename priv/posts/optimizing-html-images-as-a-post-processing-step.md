@@ -1,4 +1,3 @@
-+++
 [
     title: "Optimizing HTML images as a post-processing step",
     date: ~D(2024-03-30),

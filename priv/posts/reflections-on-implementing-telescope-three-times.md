@@ -1,4 +1,3 @@
-+++
 [
     title: "Implementing a neovim fuzzy finder",
     date: ~D(2024-01-07),

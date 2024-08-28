@@ -1,4 +1,3 @@
-+++
 [
     title: "A different way of working with streaming JSON",
     date: ~D(2024-02-28),

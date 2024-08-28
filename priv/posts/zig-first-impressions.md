@@ -1,4 +1,3 @@
-+++
 [
     title: "Zig: First impressions",
     date: ~D(2023-10-18),

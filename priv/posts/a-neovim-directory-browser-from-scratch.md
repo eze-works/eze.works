@@ -1,4 +1,3 @@
-+++
 [
     title: "A simple Neovim directory browser from scratch",
     date: ~D(2024-01-14),

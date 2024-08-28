@@ -1,4 +1,3 @@
-+++
 [
     title: "Software as a craft",
     date: ~D(2024-05-12),

@@ -1,4 +1,3 @@
-+++
 [
     title: "Reflections on writing parser combinator libraries",
     date: ~D(2023-12-13),

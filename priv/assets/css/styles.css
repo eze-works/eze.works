@@ -123,7 +123,7 @@ a {
   padding: 1rem 0;
 
   &>p+p {
-      margin-block-start: 0.3rem;
+      margin-block-start: 0.8rem;
     }
 
     img {
@@ -138,7 +138,8 @@ a {
 
     :not(pre)>code {
       font-size: 0.8em;
-      color: var(--color-primary-3);
+      border: 1px solid var(--color-black);
+      padding: 0 0.3rem 0.1rem 0.3rem;
     }
 
     pre:has(> code) {
@@ -150,6 +151,7 @@ a {
     ul,
     ol {
       padding-inline-start: 2rem;
+      margin-block-end: 0.8rem;
     }
 
     ol {

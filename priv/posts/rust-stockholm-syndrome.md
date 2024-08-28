@@ -1,4 +1,3 @@
-+++
 [
     title: "Rust Stockholm Syndrome",
     date: ~D(2023-10-04),
