@@ -15,7 +15,7 @@ defmodule EzeWorks do
     paths |> Enum.map(&load_post/1)
   end
 
-  @metadata_fields [:title, :date, :labels]
+  @metadata_fields [:title, :date, :labels, :stage]
   defp load_post(path) do
     {:ok, s} = :file.read_file(path, [:raw])
     [_, meta, post_content] = String.split(s, "+++", parts: 3)
@@ -28,7 +28,8 @@ defmodule EzeWorks do
       title: meta[:title],
       labels: meta[:labels],
       date: meta[:date],
-      content: html
+      stage: meta[:stage] || :published,
+      content: html,
     }
   end
 end

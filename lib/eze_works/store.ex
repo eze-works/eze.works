@@ -30,8 +30,14 @@ defmodule EzeWorks.Store do
     {:noreply, []}
   end
 
+  @doc """
+  Returns any non-draft posts in descending order of publication date
+  """
   def get_posts() do
-    :ets.tab2list(:by_slug) |> Enum.map(fn {_key, value} -> value end)
+    :ets.tab2list(:by_slug)
+    |> Enum.map(fn {_key, value} -> value end)
+    |> Enum.reject(fn post -> post.stage == :draft end)
+    |> Enum.sort_by(fn post -> post.date end, {:desc, Date})
   end
 
   def get_post(slug) do
