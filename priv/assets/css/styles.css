@@ -38,9 +38,17 @@ a {
 }
 
 /**
- * HOME PAGE
+ * Re-usable classes
  */
 
+.center {
+  max-inline-size: 60rem;
+  margin-inline: auto;
+}
+
+/**
+ * HOME PAGE
+ */
 
 .featured-quote {
   font-size: 0.8rem;
@@ -52,8 +60,6 @@ a {
 }
 
 .post-list {
-  max-inline-size: 60rem;
-  margin-inline: auto;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -117,9 +123,7 @@ a {
  */
 
 .post-container {
-  max-inline-size: 60rem;
   padding: 0rem 2rem;
-  margin-inline: auto;
 }
 
 .post-meta {

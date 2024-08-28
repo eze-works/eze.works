@@ -2,7 +2,7 @@ defmodule EzeWorks.PageHandler do
   def home(%{posts: posts}) do
     base_layout([
       {:div, %{class: "featured-quote"}, featured_quote()},
-      {:div, %{class: "post-list"}, Enum.map(posts, &post_card/1)}
+      {:div, %{class: "post-list center"}, Enum.map(posts, &post_card/1)}
     ])
   end
 
@@ -32,7 +32,7 @@ defmodule EzeWorks.PageHandler do
     base_layout([
       {
         :div,
-        %{class: "post-container"},
+        %{class: "post-container center"},
         {
           :div,
           %{class: "post-meta"},
