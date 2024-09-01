@@ -46,9 +46,16 @@ defmodule EzeWorks.PageHandler do
   end
 
   def not_found() do
-    base_layout([
-      {:h1, "NOT FOUND"}
-    ])
+    base_layout(
+      [
+        {
+          :div,
+          %{class: "center not-found"},
+          {:h1, "The page you requested could not be found"}
+        }
+      ],
+      title: "Page Not Found"
+    )
   end
 
   @base_options [title: "Home"]
@@ -61,8 +68,12 @@ defmodule EzeWorks.PageHandler do
         head(opts),
         {
           :body,
-          {:div, %{id: "logo", class: "center"}, {:a, %{href: "/"}, "e.w"}},
-          content,
+          {
+            :div,
+            %{id: "main-content"},
+            {:div, %{id: "logo", class: "center"}, {:a, %{href: "/"}, "e.w"}},
+            content
+          },
           footer()
         }
       }

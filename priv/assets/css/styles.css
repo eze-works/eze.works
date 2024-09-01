@@ -53,6 +53,10 @@ a {
     text-decoration: underline;
 }
 
+#main-content {
+    min-height: 90vh;
+}
+
 /**
  * Re-usable classes
  */
@@ -60,6 +64,14 @@ a {
 .center {
     max-inline-size: 60rem;
     margin-inline: auto;
+}
+
+/**
+ * 404 PAGE
+ */
+.not-found {
+    padding: 4rem 0;
+    text-align: center;
 }
 
 /**
