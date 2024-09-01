@@ -32,6 +32,7 @@ body {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
+    font-variant-caps: all-small-caps;
     font-family: "IBM Plex Mono", monospace;
 
     a {
