@@ -20,12 +20,20 @@ defmodule EzeWorks.PageHandler do
     {:span, %{class: "post-label"}, label}
   end
 
+  @quotes [
+    {
+      "We build our computers the way we build our cities – over time, without a plan, on top of ruins.",
+      "Ellen Ullman, Life in Code"
+    },
+    {
+      "Give me six hours to chop down a tree and I will spend the first four sharpening the axe.",
+      "Unclear ¯\\_(ツ)_/¯"
+    }
+  ]
   defp featured_quote() do
-    [
-      {:p,
-       "We build our computers the way we build our cities – over time, without a plan, on top of ruins."},
-      {:p, "– Ellen Ullman, Life in Code"}
-    ]
+    {quote, source} = Enum.random(@quotes)
+
+    [{:p, quote}, {:p, "– #{source}"}]
   end
 
   def single_post(%{post: post}) do
