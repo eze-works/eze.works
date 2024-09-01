@@ -12,7 +12,7 @@ defmodule EzeWorks.PageHandler do
       %{class: "post-card"},
       {:a, %{class: "post-card-title", href: "/post/#{post.slug}"}, post.title},
       {:span, %{class: "post-card-labels"}, Enum.map(post.labels, &label/1)},
-      {:span, %{class: "post-card-date"}, Calendar.strftime(post.date, "%b %d, %Y")},
+      {:span, %{class: "post-card-date"}, Calendar.strftime(post.date, "%b %d, %Y")}
     }
   end
 
@@ -61,6 +61,7 @@ defmodule EzeWorks.PageHandler do
         head(opts),
         {
           :body,
+          {:div, %{id: "logo", class: "center"}, {:a, %{href: "/"}, "e.w"}},
           content,
           footer()
         }
