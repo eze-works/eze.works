@@ -7,5 +7,5 @@ WantedBy=default.target
 
 [Service]
 Type=exec
-ExecStart=%h/source/eze.works/_build/prod/rel/eze_works/bin/eze_works start
+ExecStart=%h/deploy/eze_works/bin/eze_works start
 StandardOutput=journal
