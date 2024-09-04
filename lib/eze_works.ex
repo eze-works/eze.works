@@ -2,12 +2,9 @@ defmodule EzeWorks do
   use Application
 
   def start(_type, _args) do
-    :telemetry.attach_many(
+    :telemetry.attach(
       "web-server-telemetry",
-      [
-        [:bandit, :request, :stop],
-        [:bandit, :request, :exception]
-      ],
+      [:bandit, :request, :stop],
       &EzeWorks.Telemetry.dispatch_event/4,
       nil
     )

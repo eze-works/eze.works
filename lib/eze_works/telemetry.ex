@@ -13,7 +13,7 @@ defmodule EzeWorks.Telemetry do
     field(:duration_micro, number())
   end
 
-  def dispatch_event(_event, measurements, meta, _config) do
+  def dispatch_event([:bandit, :request, :stop], measurements, meta, _config) do
     is_asset_request = String.starts_with?(meta.conn.request_path, "/assets/")
     duration_milli = System.convert_time_unit(measurements.duration, :native, :millisecond)
     duration_micro = System.convert_time_unit(measurements.duration, :native, :microsecond)
