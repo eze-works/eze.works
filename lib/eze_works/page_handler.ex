@@ -116,9 +116,7 @@ defmodule EzeWorks.PageHandler do
   end
 
   defp js() do
-    [
-      {:script, %{src: "/assets/js/htmx.min.js"}}
-    ]
+    []
   end
 
   @license_link "https://creativecommons.org/licenses/by-sa/4.0/"
