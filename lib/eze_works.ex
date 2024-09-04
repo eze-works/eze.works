@@ -2,9 +2,20 @@ defmodule EzeWorks do
   use Application
 
   def start(_type, _args) do
+    :telemetry.attach_many(
+      "web-server-telemetry",
+      [
+        [:bandit, :request, :stop],
+        [:bandit, :request, :exception]
+      ],
+      &EzeWorks.Telemetry.dispatch_event/4,
+      nil
+    )
+
     children = [
       {EzeWorks.Store, get_posts()},
-      {Bandit, plug: EzeWorks.Router, port: 3000}
+      {Bandit, plug: EzeWorks.Router, port: 3000},
+      {Task.Supervisor, name: EzeWorks.Workers}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: EzeWorks)
@@ -29,7 +40,7 @@ defmodule EzeWorks do
       labels: meta[:labels],
       date: meta[:date],
       stage: meta[:stage] || :published,
-      content: html,
+      content: html
     }
   end
 end

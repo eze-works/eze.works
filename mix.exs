@@ -21,9 +21,11 @@ defmodule EzeWorks.MixProject do
 
   defp deps do
     [
+      {:typed_struct, "~> 0.3.0"},
       {:pile, "~> 0.1"},
       {:bandit, "~> 1.0"},
-      {:mdex, "~> 0.1"}
+      {:mdex, "~> 0.1"},
+      {:telemetry, "~> 1.0"}
     ]
   end
 end

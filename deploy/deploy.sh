@@ -15,4 +15,9 @@ scp ./deploy/eze_works.service "${USER}@${HOST}:~/.config/systemd/user/"
 scp ./tmp/release/eze_works.tar.gz "${USER}@${HOST}:~/deploy/"
 
 # Remote to the machine, extract the archive and restart the systemd service
-ssh "${USER}@${HOST}" "tar --extract --gzip --file ~/deploy/eze_works.tar.gz --directory ~/deploy && systemctl --user daemon-reload && systemctl --user restart eze_works.service"
+echo "
+set -euxo pipefail
+tar --extract --gzip --file ~/deploy/eze_works.tar.gz --directory ~/deploy
+systemctl --user daemon-reload
+systemctl --user restart eze_works.service
+" |  ssh -T "${USER}@${HOST}"

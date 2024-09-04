@@ -1,8 +1,6 @@
 defmodule EzeWorks.Router do
   use Plug.Router
 
-  plug(Plug.RequestId)
-  plug(Plug.Logger)
   plug(Plug.Static, at: "assets", from: {:eze_works, "priv/assets"})
   plug(:match)
   plug(:dispatch)
