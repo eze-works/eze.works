@@ -13,7 +13,12 @@ defmodule EzeWorks.Telemetry do
     field(:duration_micro, number())
   end
 
-  def dispatch_event([:bandit, :request, :stop], measurements, meta, _config) do
+  def dispatch_event(
+        [:bandit, :request, :stop],
+        measurements,
+        %{conn: %Plug.Conn{}} = meta,
+        _config
+      ) do
     is_asset_request = String.starts_with?(meta.conn.request_path, "/assets/")
     duration_milli = System.convert_time_unit(measurements.duration, :native, :millisecond)
     duration_micro = System.convert_time_unit(measurements.duration, :native, :microsecond)
@@ -33,6 +38,10 @@ defmodule EzeWorks.Telemetry do
       Task.Supervisor.start_child(EzeWorks.Workers, fn ->
         write_canonical_log(log_line)
       end)
+  end
+
+  def dispatch_event([:bandit, :request, :stop], _measurements, _meta, _config) do
+    # the request had an error and does not include the `conn` field, do nothing
   end
 
   defp write_canonical_log(%EzeWorks.Telemetry.CanonicalLog{} = log_line) do

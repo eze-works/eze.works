@@ -21,6 +21,7 @@ defmodule EzeWorks.MixProject do
 
   defp deps do
     [
+      {:file_system, "~> 1.0", only: :dev},
       {:typed_struct, "~> 0.3.0"},
       {:pile, "~> 0.1"},
       {:bandit, "~> 1.0"},

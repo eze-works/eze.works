@@ -10,6 +10,7 @@ defmodule EzeWorks do
     )
 
     children = [
+      {EzeWorks.CodeReload, dirs: [Path.absname("lib"), Path.absname("priv")]},
       {EzeWorks.Store, get_posts()},
       {Bandit, plug: EzeWorks.Router, port: 3000},
       {Task.Supervisor, name: EzeWorks.Workers}
