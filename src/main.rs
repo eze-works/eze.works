@@ -14,8 +14,6 @@ fn load_posts() -> anyhow::Result<Vec<Post>> {
     let mut posts = vec![];
     let posts_dir = env::current_dir()?.join("posts");
     let posts_iter = fs::read_dir(posts_dir)?;
-    let markdown_options = pulldown_cmark::Options::ENABLE_FOOTNOTES
-        | pulldown_cmark::Options::ENABLE_PLUSES_DELIMITED_METADATA_BLOCKS;
 
     for file in posts_iter {
         let path = file?.path();
@@ -29,10 +27,13 @@ fn load_posts() -> anyhow::Result<Vec<Post>> {
         let basename = path.file_stem().unwrap();
         let slug = basename.to_string_lossy().to_string();
 
-        let parser = pulldown_cmark::Parser::new_ext(content, markdown_options);
-        let mut html = String::new();
-        pulldown_cmark::html::write_html_fmt(&mut html, parser)
-            .with_context(|| format!("invalid markdown in file {path:?}"))?;
+        let mut extension_options = comrak::ExtensionOptions::default();
+        extension_options.footnotes = true;
+        let options = comrak::Options {
+            extension: extension_options,
+            ..comrak::Options::default()
+        };
+        let html = comrak::markdown_to_html(content, &options);
 
         let post = Post {
             slug,
@@ -56,23 +57,28 @@ fn main() -> anyhow::Result<()> {
 
     let files = FileServer::new("/assets", "./assets");
     let router = Router::new()
-        .get("/", {
+        .get(["/", "/home"], {
             let posts = posts.clone();
             move |ctx, _| {
                 let html = page::home(posts.as_slice()).to_string();
                 ctx.with_status(200).with_html_body(html)
             }
         })
-        .get("/post/{slug}", {
+        .get(["/post/{slug}", "/post/{slug}/"], {
             let posts = posts.clone();
             move |ctx, params| {
                 let slug = &params["slug"];
                 let Some(post) = posts.iter().find(|f| &f.slug == slug) else {
-                    return ctx.with_status(status::NOT_FOUND);
+                    let html = page::not_found().to_string();
+                    return ctx.with_status(status::NOT_FOUND).with_html_body(html);
                 };
                 let html = page::single_post(post).to_string();
                 ctx.with_status(status::OK).with_html_body(html)
             }
+        })
+        .not_found(|ctx| {
+            let html = page::not_found().to_string();
+            ctx.with_status(status::NOT_FOUND).with_html_body(html)
         });
 
     let pipeline = files.and(router);

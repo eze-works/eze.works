@@ -214,9 +214,18 @@ a {
         margin-block: 1rem;
     }
 
+    .footnote-ref {
+      font-size: 1rem;
+      vertical-align: super
+    }
     .footnotes {
-        margin-block-start: 5rem;
-        font-size: var(--fs-small);
+        margin-block-start: 2rem;
+        font-size: 0.9rem;
         line-height: 1.25;
+        ol {
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
     }
 }

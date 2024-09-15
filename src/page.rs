@@ -1,8 +1,10 @@
 mod home;
+mod not_found;
 mod single_post;
 
 pub use home::home;
 pub use single_post::single_post;
+pub use not_found::not_found;
 
 use toph::{html, text, Node};
 
