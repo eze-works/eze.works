@@ -1,8 +1,8 @@
-[
-    title: "Elixir, two weeks in",
-    date: ~D(2024-08-27),
-    labels: ["elixir"],
-]
+{
+    "title": "Elixir, two weeks in",
+    "date": "2024-08-27",
+    "labels": ["elixir"]
+}
 +++
 
 The [first thing I wrote](/post/rust-stockholm-syndrome) about on this site compared writing Rust to suffering of Stockholm Syndrome.

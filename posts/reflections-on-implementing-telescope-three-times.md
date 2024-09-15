@@ -1,8 +1,8 @@
-[
-    title: "Implementing a neovim fuzzy finder",
-    date: ~D(2024-01-07),
-    labels: ["neovim"],
-]
+{
+    "title": "Implementing a neovim fuzzy finder",
+    "date": "2024-01-07",
+    "labels": ["neovim"]
+}
 +++
 
 Whoever said "third time's the charm" was a prophet, because I have done it again: [implementing a thing three times](/post/reflections-on-writing-3-parser-combinator-libraries") before being satisfied with the final result. This time it's a homegrown version of the popular neovim plugin [Telescope](https://github.com/nvim-telescope/telescope.nvim).

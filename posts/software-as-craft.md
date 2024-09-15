@@ -1,8 +1,8 @@
-[
-    title: "Software as a craft",
-    date: ~D(2024-05-12),
-    labels: ["musings"],
-]
+{
+    "title": "Software as a craft",
+    "date": "2024-05-12",
+    "labels": ["musings"]
+}
 +++
 
 I recently listened to a podcast that solidified something I have often thought: The term "software engineer" is a misnomer.

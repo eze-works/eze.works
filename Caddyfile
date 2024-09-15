@@ -1,0 +1,11 @@
+{
+  debug
+  auto_https off
+}
+http://localhost:3000 {
+  handle {
+    reverse_proxy localhost:8000 {
+      transport fastcgi
+    }
+  }
+}

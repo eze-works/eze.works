@@ -1,8 +1,8 @@
-[
-    title: "A different way of working with streaming JSON",
-    date: ~D(2024-02-28),
-    labels: ["json", "rust"],
-]
+{
+    "title": "A different way of working with streaming JSON",
+    "date": "2024-02-28",
+    "labels": ["json", "rust"]
+}
 +++
 I have implemented [a streaming JSON parser](https://crates.io/crates/jsn), and with it, a curious new approach to working with streaming JSON.
 

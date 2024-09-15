@@ -1,8 +1,8 @@
-[
-    title: "Time for Computers",
-    date: ~D(2023-11-04),
-    labels: ["musings"],
-]
+{
+    "title": "Time for Computers",
+    "date": "2023-11-04",
+    "labels": ["musings"]
+}
 +++
 The basic unit for CPU time is a nanosecond. This is too small a measure to develop an intuition for. But you can build intuition by comparison. In the "Time for Computers" episode of the [Two's Complement](https://www.twoscomplement.org/) podcast, Matt Godbolt tries to tackle this by comparing the CPU time scale with a human time scale. This really helped me, so i'm reproducing a hand-wavy transcription of that scale here:
 

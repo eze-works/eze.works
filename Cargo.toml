@@ -1,0 +1,18 @@
+[package]
+name = "ezeweb"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.88"
+env_logger = { version = "0.11.5", features = ["unstable-kv"] }
+jiff = { version = "0.1.13", features = ["serde"] }
+matchit = "0.8.4"
+pulldown-cmark = "0.12.1"
+rand = "0.8.5"
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = "1.0.128"
+#toph = "0.11.0"
+toph = { path = "../toph"}
+# vintage = "0.2.0"
+vintage = { path = "../vintage" }

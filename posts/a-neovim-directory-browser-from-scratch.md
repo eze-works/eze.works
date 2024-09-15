@@ -1,8 +1,8 @@
-[
-    title: "A simple Neovim directory browser from scratch",
-    date: ~D(2024-01-14),
-    labels: ["neovim"]
-]
+{
+    "title": "A simple Neovim directory browser from scratch",
+    "date": "2024-01-14",
+    "labels": ["neovim"]
+}
 +++
 As part of my quest to replace my neovim config with 100% homemade parts, I ended up replacing netrw with my own version of a directory browser. I have never needed the remote browsing capabilities of netrw, so I figured I could replace it with something much simpler.
 

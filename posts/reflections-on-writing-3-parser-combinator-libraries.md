@@ -1,8 +1,8 @@
-[
-    title: "Reflections on writing parser combinator libraries",
-    date: ~D(2023-12-13),
-    labels: ["parsing", "rust"],
-]
+{
+    "title": "Reflections on writing parser combinator libraries",
+    "date": "2023-12-13",
+    "labels": ["parsing", "rust"]
+}
 +++
 I have [this article](https://www.theorangeduck.com/page/you-could-have-invented-parser-combinators) to thank for dragging me down the parser combinator rabbit hole. The result has been [three](https://crates.io/crates/ruminant) [separate](https://crates.io/crates/parser-compose) [attempts](https://crates.io/crates/bparse) at writing a parsing  library, so here are a some thoughts.
 
