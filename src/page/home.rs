@@ -1,16 +1,17 @@
-use crate::post::Post;
+use crate::post::{PostStage, Post};
 use toph::{html, text, Node};
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
 pub fn home(posts: &[Post]) -> Node {
+    let published = posts.iter().filter(|p| p.metadata.stage == PostStage::Published);
     super::base_layout(html! {
         div[class: "featured-quote"] {
             featured_quote();
         }
 
         div [class: "post-list center"] {
-            posts.into_iter().map(post_card);
+            published.map(post_card);
         }
     })
 }

@@ -81,7 +81,7 @@ fn main() -> anyhow::Result<()> {
             ctx.with_status(status::NOT_FOUND).with_html_body(html)
         });
 
-    let pipeline = files.and(router);
+    let pipeline = files.or(router);
 
     let server = start("localhost:8000", move |ctx| pipeline.run(ctx))?;
 
