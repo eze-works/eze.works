@@ -24,7 +24,8 @@ body {
     font-family: "Atkinson Hyperlegible", sans-serif;
     font-size: 16px;
     line-height: 1.75;
-    background-color: var(--color-almost-white);
+    background-color: var(--color-almost-black);
+    color: var(--color-almost-white);
 }
 
 #logo {
@@ -37,10 +38,18 @@ body {
 
     a {
         display: inline-block;
-        color: var(--color-almost-white);
-        background-color: var(--color-light-black);
         text-decoration: none;
         padding: 0 1rem 0.3rem 1rem;
+        color: var(--color-almost-white);
+        background-color: var(--color-light-black);
+        transition:
+          color 0.2s,
+          background-color 0.2s;
+
+        &:hover {
+          background-color: var(--color-almost-white);
+          color: var(--color-light-black);
+        }
     }
 }
 
@@ -52,6 +61,11 @@ footer {
 
 a {
     text-decoration: underline;
+    color: #8cb4ff;
+    &:visited {
+      color: #ffadff;
+    }
+
 }
 
 #main-content {
