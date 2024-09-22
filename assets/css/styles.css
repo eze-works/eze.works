@@ -28,7 +28,7 @@ body {
 }
 
 #logo {
-    padding: 1rem;
+    padding: 0 1rem;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
