@@ -36,7 +36,7 @@ Here is a diagram:
 
 ## Always start terminal mode in insert mode
 
-This tip is actually documented in `:help :terminal`. But I found you might need to do a bit more if you have a setup such that you can switch back to a terminal buffer (instead of exiting the terminal process when you are done with it). Here is a snippet from my config [^1]:
+This tip is actually documented in `:help :terminal`. But I found you might need to do a bit more if you have a setup such that you can switch back to a terminal buffer (instead of exiting the terminal process when you are done with it). Here is a snippet from my config:
 
 ```lua
 -- Terminals should always start with insert mode so that keys are immediately
@@ -60,8 +60,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 ```
 
----
-
+<details>
+    <summary>What is <code>core.startinsert()</code>?</summary>
+    <p>
+        <code>core.startinsert()</code> is just a wrapper for <code>vim.schedule(function() vim.cmd("startinsert")end)</code>.
+        I have generally found that `:startinsert` just doesn't seem to work sometimes unless you defer it.
+        I have no idea why :/
+    </p>
+</details>
 
 The combination of these techniques has allowed me to seamlessly use `lf` and `lazygit` without leaving Neovim. It Just Works (TM).
 
@@ -71,6 +77,3 @@ _`lf` integration:_
 
 _`lazygit` integration:_
 ![lazy-git-integration](/assets/images/neovim-lazygit-integration.png)
-
-
-[^1]: `core.startinsert()` is just a wrapper for `vim.schedule(function() vim.cmd("startinsert")end)`. I have generally found that `:startinsert` just doesn't seem to work sometimes unless you defer it. I have no idea why :/

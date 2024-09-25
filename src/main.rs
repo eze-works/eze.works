@@ -6,8 +6,7 @@ use post::{Metadata, Post};
 use std::env;
 use std::fs;
 use std::sync::Arc;
-use vintage::pipe::{FileServer, Pipe, Router};
-use vintage::{start, status};
+use vintage::{status, Response, ServerConfig};
 
 // Load the posts from the adjacent directory into memory
 fn load_posts() -> anyhow::Result<Vec<Post>> {
@@ -27,13 +26,10 @@ fn load_posts() -> anyhow::Result<Vec<Post>> {
         let basename = path.file_stem().unwrap();
         let slug = basename.to_string_lossy().to_string();
 
-        let mut extension_options = comrak::ExtensionOptions::default();
-        extension_options.footnotes = true;
-        let options = comrak::Options {
-            extension: extension_options,
-            ..comrak::Options::default()
-        };
-        let html = comrak::markdown_to_html(content, &options);
+        let options = pulldown_cmark::Options::ENABLE_GFM;
+        let parser = pulldown_cmark::Parser::new_ext(content, options);
+        let mut html = String::new();
+        pulldown_cmark::html::write_html_fmt(&mut html, parser)?;
 
         let post = Post {
             slug,
@@ -55,36 +51,34 @@ fn main() -> anyhow::Result<()> {
     // Bundle in an `Arc` so the handlers can share it.
     let posts = Arc::new(load_posts()?);
 
-    let files = FileServer::new("/assets", "./assets");
-    let router = Router::new()
-        .get(["/", "/home"], {
+    let config = ServerConfig::new()
+        .on_get(["/", "/home"], {
             let posts = posts.clone();
-            move |ctx, _| {
+            move |_, _| {
                 let html = page::home(posts.as_slice()).to_string();
-                ctx.with_status(200).with_html_body(html)
+                Response::html(html)
             }
         })
-        .get(["/post/{slug}", "/post/{slug}/"], {
+        .on_get(["/post/{slug}", "/post/{slug}/"], {
             let posts = posts.clone();
-            move |ctx, params| {
+            move |_, params| {
                 let slug = &params["slug"];
                 let Some(post) = posts.iter().find(|f| &f.slug == slug) else {
                     let html = page::not_found().to_string();
-                    return ctx.with_status(status::NOT_FOUND).with_html_body(html);
+                    return Response::html(html).set_status(status::NOT_FOUND);
                 };
                 let html = page::single_post(post).to_string();
-                ctx.with_status(status::OK).with_html_body(html)
+                Response::html(html)
             }
         })
-        .not_found(|ctx| {
+        .unhandled(|_| {
             let html = page::not_found().to_string();
-            ctx.with_status(status::NOT_FOUND).with_html_body(html)
-        });
+            Response::html(html).set_status(status::NOT_FOUND)
+        })
+        .serve_files("/assets", "./assets");
 
-    let pipeline = files.or(router);
+    let handle = vintage::start(config, "localhost:8000").unwrap();
 
-    let server = start("localhost:8000", move |ctx| pipeline.run(ctx))?;
-
-    server.join();
+    handle.join();
     Ok(())
 }

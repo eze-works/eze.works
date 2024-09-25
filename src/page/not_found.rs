@@ -7,5 +7,5 @@ pub fn not_found() -> Node {
                 text("The page you requested could not be found");
             }
         }
-    })
+    }, super::BaseLayoutOptions::default())
 }

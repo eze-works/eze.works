@@ -31,7 +31,20 @@ My first and third attempts were event-driven. I am not sure how common this is,
 
 - The preview window's only job is to [watch for these `new_selection` events](https://gitlab.com/wake-sleeper/plugin-free-neovim/-/blob/8663c85081fda56592ba2ebcf95e63bb92d3902d/lua/uscope.lua#L273) and preview the thing under the cursor.
 
-The result is a system that is much easier to reason about than my second attempt where things were more sequential. It is also much easier to refactor and cleanup. All things in moderation though! I had an attempt 1.5 that never got anywhere because I became trigger happy with events and went too far[^1]
+The result is a system that is much easier to reason about than my second attempt where things were more sequential. It is also much easier to refactor and cleanup. All things in moderation though! I had an attempt 1.5 that never got anywhere because I became trigger happy with events and went too far.
+
+<details>
+    <summary>Attempt 1.5</summary>
+    <p>
+        I had just discovered lua metatables, and so I combined it with my newly-discovered custom event knowledge to create an unholy match: setting properties on a global `state` table would trigger events.
+    </p>
+    <p>
+        So for example setting `state.opened` would trigger an event that would open the filter ui.
+        I think there are many reasons this is a bad practice. 
+        It bit me for two main reasons though: (1) it became difficult to remember which properties trigger events and (2) setting the state optimistically before actually trying to _do the thing_ gets you into messy ground when _the thing_ fails to be done.
+        Now your state is out of whack.
+    </p>
+</details>
 
 
 __`vim.api.nvim_buf_call()` exists__
@@ -40,8 +53,5 @@ There are a handful of occaisions where I needed to execute an `Ex` command or a
 
 __Computers are faaast__
 
-There is a lot of talk among plugin developers (or at least that's how I perceive it) about the importance of doing things in an async manner. Before building this, I too assumed I would have to use `jobstart()`. I mean, I am making calls to an external executable and updating buffers on every user key press! Surely the user will notice some sluggishness if the executable calls are happening synchronously. Well... turns out no. I call `vim.fn.system(...)`, repaint the result screen and repaint the preview screen on every key press. The preview screen also reads the selected file on every key press too. I don't event try to cache anything. Its practically instantaneous[^2]. My intuition of how fast computers can get things done is way off.
+There is a lot of talk among plugin developers (or at least that's how I perceive it) about the importance of doing things in an async manner. Before building this, I too assumed I would have to use `jobstart()`. I mean, I am making calls to an external executable and updating buffers on every user key press! Surely the user will notice some sluggishness if the executable calls are happening synchronously. Well... turns out no. I call `vim.fn.system(...)`, repaint the result screen and repaint the preview screen on every key press. The preview screen also reads the selected file on every key press too. I don't event try to cache anything. Its practically instantaneous. My intuition of how fast computers can get things done is way off.
 
-[^1]: I had just discovered lua metatables, and so i combined it with my newly-discovered custom event knowledge to create an unholy match: Setting properties on a global `State` table would trigger events. So for example setting `State.opened` would trigger an event that would open the filter UI. I think there are many reasons this is a bad practice. It bit me for two main reasons though: (1) It became difficult to remember which properties trigger events and (2) Setting the state optimistically before actually trying to _do the thing_ gets you into messy ground when _the thing_ fails to be done. Now your state is out of whack.
-
-[^2]: Naturally, it would depend on the codebase you are navigating. I tried it on my work's codebase and on Neovim's codebase. No noticeable difference. It perhaps would start to matter if you are working on something the size of the Linux kernel maybe? But ... are you? No? Ok.

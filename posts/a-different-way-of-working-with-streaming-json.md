@@ -6,7 +6,16 @@
 +++
 I have implemented [a streaming JSON parser](https://crates.io/crates/jsn), and with it, a curious new approach to working with streaming JSON.
 
-[Almost](https://www.baeldung.com/jackson-streaming-api#bd-parsing-json) all [existing](https://rapidjson.org/md_doc_sax.html#Reader) streaming [json parser](https://github.com/dscape/clarinet?tab=readme-ov-file#basics) implementations yield JSON "tokens"[^1]. Given the following JSON:
+[Almost](https://www.baeldung.com/jackson-streaming-api#bd-parsing-json) all [existing](https://rapidjson.org/md_doc_sax.html#Reader) streaming [json parser](https://github.com/dscape/clarinet?tab=readme-ov-file#basics) implementations yield JSON "tokens".
+<details>
+    <summary>Oboejs</summary>
+    <p>
+    <a href="https://web.archive.org/web/20210814153523/http://oboejs.com/">Oboejs</a> is a notable exception.
+    The website is down, but you can still peruse the API <a href="https://github.com/jimhigson/oboe.js-website/blob/master/pdf/examples.pdf">on the github page</a>.
+    </p>
+</details>
+
+Given the following JSON:
 
 ```json
 { "hello": "world" }
@@ -80,4 +89,3 @@ cargo run --example cli -- --file test.json --values --index 0
 ---
 _Comments on [/r/rust](https://www.reddit.com/r/rust/comments/1b2d41c/jsn_a_different_way_of_working_with_streaming_json/)_
 
-[^1]: [Oboejs](https://web.archive.org/web/20210814153523/http://oboejs.com/) is a notable exception. The website is down, but you can still peruse the API [on the github page](https://github.com/jimhigson/oboe.js-website/blob/master/pdf/examples.pdf).

@@ -13,7 +13,7 @@ pub fn home(posts: &[Post]) -> Node {
         div [class: "post-list center"] {
             published.map(post_card);
         }
-    })
+    }, super::BaseLayoutOptions::default())
 }
 
 fn post_card(post: &Post) -> Node {
