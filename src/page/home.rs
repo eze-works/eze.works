@@ -19,14 +19,12 @@ pub fn home(posts: &[Post]) -> Node {
 fn post_card(post: &Post) -> Node {
     html! {
         div[class: "post-card"] {
-            a[class: "post-card-title", href: format!("/post/{}", post.slug)] {
-                text(&post.metadata.title);
-            }
-            span[class: "post-card-labels"] {
-                post.metadata.labels.iter().map(|l| super::label(l));
-            }
             span[class: "post-card-date"] {
                 text(post.metadata.date.strftime("%b %d, %Y"));
+                text(" »");
+            }
+            a[class: "post-card-title", href: format!("/post/{}", post.slug)] {
+                text(&post.metadata.title);
             }
         }
     }

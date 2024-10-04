@@ -1,0 +1,70 @@
+19:36:13.329 [INFO] cli_log::init: Starting bacon v2.21.0 with log level TRACE
+19:36:13.330 [INFO] bacon::cli: args: Args {
+    help: false,
+    version: false,
+    prefs: false,
+    summary: false,
+    no_summary: false,
+    wrap: false,
+    no_wrap: false,
+    reverse: false,
+    no_reverse: false,
+    help_line: false,
+    no_help_line: false,
+    list_jobs: false,
+    offline: false,
+    init: false,
+    job: None,
+    no_default_features: false,
+    features: None,
+    all_features: false,
+    export_locations: false,
+    no_export_locations: false,
+    path: None,
+    args: [],
+    additional_job_args: [],
+}
+19:36:13.402 [INFO] bacon::cli: mission location: MissionLocation {
+    intended_dir: "/home/eze/crafts/eze.works",
+    package_directory: "/home/eze/crafts/eze.works",
+    cargo_toml_file: "/home/eze/crafts/eze.works/Cargo.toml",
+    intended_is_package: true,
+}
+19:36:13.402 [DEBUG] bacon::job_stack: picking job Initial
+19:36:13.403 [DEBUG] bacon::mission: watches: ["posts", "src", "tests", "benches", "examples", "build.rs"]
+19:36:13.403 [INFO] bacon::mission: missing tests : "/home/eze/crafts/eze.works/tests"
+19:36:13.403 [INFO] bacon::mission: missing benches : "/home/eze/crafts/eze.works/benches"
+19:36:13.403 [INFO] bacon::mission: missing examples : "/home/eze/crafts/eze.works/examples"
+19:36:13.403 [INFO] bacon::mission: missing build.rs : "/home/eze/crafts/eze.works/build.rs"
+19:36:13.403 [TRACE] mio::poll: registering event source with poller: token=Token(0), interests=READABLE
+19:36:13.403 [TRACE] mio::poll: registering event source with poller: token=Token(1), interests=READABLE
+19:36:13.403 [INFO] bacon::app: mission.ignorer() took 188.399µs
+19:36:13.403 [TRACE] mio::poll: registering event source with poller: token=Token(0), interests=READABLE
+19:36:13.403 [DEBUG] bacon::mission: add watch file "/home/eze/crafts/eze.works/Cargo.toml"
+19:36:13.403 [TRACE] notify::inotify: adding inotify watch: /home/eze/crafts/eze.works/Cargo.toml
+19:36:13.403 [DEBUG] bacon::mission: add watch dir "/home/eze/crafts/eze.works/posts"
+19:36:13.403 [TRACE] notify::inotify: adding inotify watch: /home/eze/crafts/eze.works/posts
+19:36:13.403 [DEBUG] bacon::mission: add watch dir "/home/eze/crafts/eze.works/src"
+19:36:13.403 [TRACE] notify::inotify: adding inotify watch: /home/eze/crafts/eze.works/src
+19:36:13.403 [TRACE] notify::inotify: adding inotify watch: /home/eze/crafts/eze.works/src/page
+19:36:13.403 [DEBUG] bacon::mission: command: Command {
+    program: "cargo",
+    args: [
+        "cargo",
+        "run",
+        "--color",
+        "always",
+    ],
+    cwd: Some(
+        "/home/eze/crafts/eze.works",
+    ),
+    create_pidfd: false,
+}
+19:36:13.404 [INFO] bacon::executor: start task Task { backtrace: false }
+19:36:13.467 [INFO] bacon::app: action: None
+19:36:13.469 [INFO] bacon::app: action: None
+19:36:17.879 [DEBUG] bacon::app: key combination pressed: q
+19:36:17.879 [INFO] bacon::app: action: Some(Internal(Quit))
+19:36:17.879 [DEBUG] bacon::app: requested action: Internal(Quit)
+19:36:17.880 [DEBUG] bacon::executor: explicit interrupt received
+19:36:17.881 [INFO] bacon: bye

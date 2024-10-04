@@ -1,0 +1,11 @@
+default_job = "start"
+
+[jobs.start]
+command = ["cargo", "run", "--color", "always"]
+watch = ["posts"]
+need_stdout = true
+background = false
+on_change_strategy = "kill_then_restart"
+
+[keybinds]
+r = "job:start"

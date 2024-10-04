@@ -22,8 +22,8 @@
 
 body {
     font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 18px;
+    line-height: 1.5;
     background-color: var(--color-tinted-black);
     color: var(--color-almost-white);
 }
@@ -65,7 +65,17 @@ a {
     &:visited {
       color: #ffadff;
     }
+}
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-block: 1rem;
+    font-weight: 400;
 }
 
 #main-content {
@@ -114,38 +124,26 @@ a {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.25rem;
+    gap: 1rem;
 
     .post-card-title {
-        flex: 1 0 50%;
         &:hover {
             cursor: pointer;
         }
     }
 
-    .post-card-labels {
-        flex: 0 1 15%;
-        font-size: 0.7rem;
-        font-family: "IBM Plex Mono", monospace;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        flex-wrap: wrap;
-    }
-
     .post-card-date {
-        flex: 0 1 15%;
         font-family: "IBM Plex Mono", monospace;
         font-style: italic;
-        font-size: 0.7rem;
+        font-size: 0.9rem;
     }
 }
 
-@media (width <= 730px) {
+@media (width <= 600px) {
     .post-list {
         gap: 1.5rem;
     }
+
     .post-card {
         flex-direction: column;
         align-items: flex-start;
@@ -174,7 +172,6 @@ a {
     flex-direction: column;
     gap: 0.3rem;
     padding: 1rem 0;
-    border-bottom: 1px dotted var(--color-silver);
 }
 
 .post-content {
@@ -245,8 +242,17 @@ a {
     h4,
     h5,
     h6 {
-        margin-block: 1rem;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 8px;
+      }
     }
+
 
     .footnote-ref {
       font-size: 1rem;

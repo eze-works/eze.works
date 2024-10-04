@@ -5,6 +5,7 @@
 }
 +++
 
+
 I recently listened to a podcast that solidified something I have often thought: The term "software engineer" is a misnomer.
 
 The episode in question is an interview with [Greg Wilson](https://third-bit.com/), a programmer turned teacher. The episode is called "Programming and Industrial Design with Greg Wilson". Around the 19:35 mark, Greg makes the point that the practice of writing software has more in common with industrial design than any of the other real engineering professions. After ruminating on this for a day, I think I agree, but there is a little bit of nuance I would like to add.

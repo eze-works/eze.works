@@ -9,11 +9,9 @@ pub fn single_post(post: &Post) -> Node {
                     h1[class: "post-title"] {
                         text(&post.metadata.title);
                     }
-                    span[class: "post-labels"] {
-                        post.metadata.labels.iter().map(|l| super::label(l));
-                    }
                     span[class: "post-date"] {
                         text(post.metadata.date.strftime("%b %d, %Y"));
+
                     }
                 }
                 div[class: "post-content"] {

@@ -10,9 +10,11 @@
 > This post no longer reflects my opinions on command line parsing.
 >
 > 1. A deep sub-command tree is not a problem with the syntax. It's fixable by redesigning the CLI in question.
-> 1. For a CLI to exist, you eventually need to define its structure.
-     So even if there is ambiguity when parsing an `--option` followed by a `value`, if the CLI parser is well designed, that ambiguity disappears when interpreting these arguments in the CLI application.
-> 1. I still do not like fused options
+> 1. With the right API, there is no ambiguity when parsing `--option` followed by a `value`.
+>    If the user asks for an option called `opt`, and you find `--opt`, you can check if the next thing is a positional argument.
+>    If so, that's the value to return.
+>    If you find `--opt=value`, return the value without looking ahead.
+> 1. I still do not like fused/combined options
 >
 > Depsite my new perspective, I'll keep this post up. Changing one's mind is an important aspect of learning.
 
