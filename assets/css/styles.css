@@ -18,6 +18,11 @@
     --color-shaded-white: #dddddd;
     --color-almost-white: #efefef;
     --color-white: #ffffff;
+
+    --color-yellow: #f9ed69;
+    --color-orange: #f08a5d;
+    --color-red: #b83b5e;
+    --color-purple: #6a2c70;
 }
 
 body {
@@ -186,11 +191,16 @@ h6 {
     }
 
     blockquote {
-      margin-left: 3rem;
-      border-left: 5px solid var(--color-white);
-      padding-left: 1rem;
-      background-color: var(--color-light-black);
+        margin: 1rem 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-light-black);
+
+        &.markdown-alert-note {
+            margin: 1rem 0;
+            border-left: 5px solid var(--color-orange);
+        }
     }
+
     details {
       font-size: 0.9rem;
       margin: 0.75rem 1rem;

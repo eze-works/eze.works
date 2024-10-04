@@ -5,6 +5,7 @@
 }
 +++
 
+> [!NOTE]
 > _Update (2024-10-2):_
 >
 > This post no longer reflects my opinions on command line parsing.
