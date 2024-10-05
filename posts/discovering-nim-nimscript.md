@@ -15,13 +15,13 @@ echo "HELLO FROM NIM"
 ```
 
 Run it: `nim compile --hints:off --run hello.nim` and you get the output you expect.
-```text
+```
 HELLO FROM NIM
 ```
 
 Now change the file name to `hello.nims` and run it: `mv hello.nim hello.nims && nim compile --hints:off --run hello.nims`.  
 You'll get the following
-```text
+```
 HELLO FROM NIM
 HELLO FROM NIM
 ```
@@ -30,7 +30,7 @@ Wait a minute...why does it print twice?
 
 Running it again without turning off hints will provide a clue: `nim compile --run hello.nims`
 
-```text
+```
 HELLO FROM NIM
 Hint: used config file '/home/eze/.choosenim/toolchains/nim-2.0.4/config/nim.cfg' [Conf]
 Hint: used config file '/home/eze/.choosenim/toolchains/nim-2.0.4/config/config.nims' [Conf]

@@ -22,6 +22,7 @@ fn base_layout(content: Node, opts: BaseLayoutOptions) -> Node {
                 link[rel: "stylesheet", href: "/assets/css/reset.css"] {}
                 link[rel: "stylesheet", href: "/assets/css/fonts.css"] {}
                 link[rel: "stylesheet", href: "/assets/css/styles.css"] {}
+                link[rel: "stylesheet", href: "/assets/css/srcery.css"] {}
 
             }
             body {
@@ -34,6 +35,10 @@ fn base_layout(content: Node, opts: BaseLayoutOptions) -> Node {
                     content;
                 }
                 footer();
+                script[src: "/assets/js/highlight.min.js"] {}
+                script {
+                    toph::raw_text("hljs.highlightAll();");
+                }
             }
         }
 
@@ -65,14 +70,6 @@ fn footer() -> Node {
                     text("CC-BY-SA");
                 }
             }
-        }
-    }
-}
-
-fn label(label: &str) -> Node {
-    html! {
-        span[class: "post-label"] {
-            text(label);
         }
     }
 }

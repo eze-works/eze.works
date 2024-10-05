@@ -224,12 +224,31 @@ h6 {
     :not(pre) > code {
         font-size: 0.8em;
         padding: 0 0.3rem 0.1rem 0.3rem;
+        font-weight: 700;
+        border: 1px solid var(--color-silver);
+        border-radius: 3px;
     }
 
     pre:has(> code) {
+        position: relative;
         overflow: scroll;
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 0;
         margin-block: 0.75rem;
+
+        &::before {
+            content: attr(data-lang);
+            display: block;
+            font-size: 0.8rem;
+            position: absolute;
+            right: 0.75rem;
+            top: 0.75rem;
+            text-transform: uppercase;
+            color: var(--color-silver);
+        }
+        code {
+            border: 1px solid var(--color-almost-black);
+            border-radius: 3px;
+        }
     }
 
     ul,

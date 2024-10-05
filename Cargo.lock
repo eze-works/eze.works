@@ -145,6 +145,7 @@ dependencies = [
  "anyhow",
  "env_logger",
  "jiff",
+ "markdown",
  "matchit",
  "pulldown-cmark",
  "rand",
@@ -269,6 +270,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 dependencies = [
  "value-bag",
+]
+
+[[package]]
+name = "markdown"
+version = "1.0.0-alpha.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a6491e6c702bf7e3b24e769d800746d5f2c06a6c6a2db7992612e0f429029e81"
+dependencies = [
+ "unicode-id",
 ]
 
 [[package]]
@@ -573,9 +583,7 @@ dependencies = [
 
 [[package]]
 name = "toph"
-version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4b14584bf4ef7c0de99312c95d500ea25e4ad7e9b058706bb54b3a5e64a7039"
+version = "0.12.0"
 
 [[package]]
 name = "typeid"
@@ -591,6 +599,12 @@ checksum = "f7d2d4dafb69621809a81864c9c1b864479e1235c0dd4e199924b9742439ed89"
 dependencies = [
  "version_check",
 ]
+
+[[package]]
+name = "unicode-id"
+version = "0.3.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "10103c57044730945224467c09f71a4db0071c123a0648cc3e818913bde6b561"
 
 [[package]]
 name = "unicode-ident"

@@ -25,19 +25,19 @@ The popular style of command line invocations make for terrible user _and_ devel
 
 _Positional arguments are indistiguishible from sub-commands_
 
-```
+```bash
 git add remote origin https://git.blah/blah
 ```
 
 ... oh wait, that's wrong. It must be:
 
-```
+```bash
 git add origin remote https://git.blah/blah
 ```
 
 ... wrong again. It's actually:
 
-```
+```bash
 git remote add origin https://git.blah/blah
 ```
 
@@ -47,14 +47,14 @@ _Deeply nested sub-commands are not discoverable_
 
 You use this command whenever you want to authenticate to Google APIs:
 
-```
+```bash
 gcloud auth application-default login
 ```
 
 Imagine you have never run this command on your current machine.
 It is not present in your shell history, so you try to navigate the help to find it:
 
-```
+```bash
 gcloud 
 # Ugh ... a huge wall of help text to scoll past.
 # You see the `auth` subcommand. Promising...
@@ -74,7 +74,7 @@ _Parsing options and positional arguments is ambiguous_
 
 You can't tokenize a command line invocation without extra information:
 
-```
+```bash
 tar --create --gzip --file archive.tar.gz  file.to.archive
 ```
 
@@ -84,13 +84,13 @@ More annoying is the prevalence of "fused"-style options.
 
 Instead of this:
 
-```
+```bash
 pacman --query --info firefox
 ```
 
 Many CLI libraries let you write this:
 
-```
+```bash
 pacman -Qi firefox
 ```
 
@@ -118,7 +118,7 @@ The new rules:
 
 Examples:
 
-```
+```bash
 git @remote-add origin http://git.blah/blah
 gcloud @auth-application-default-login
 tar @create --gzip --file=archive.tar.gz file.to.archive

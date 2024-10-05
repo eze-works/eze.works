@@ -7,7 +7,9 @@ use std::env;
 use std::fs;
 
 use pulldown_cmark::html::write_html_fmt;
-use pulldown_cmark::{CowStr, Event, Options, Parser, Tag, TagEnd, TextMergeStream};
+use pulldown_cmark::{
+    CodeBlockKind, CowStr, Event, HeadingLevel, Options, Parser, Tag, TagEnd, TextMergeStream,
+};
 use std::sync::Arc;
 use toph::{html, text};
 use vintage::{status, Response, ServerConfig};
@@ -15,6 +17,7 @@ use vintage::{status, Response, ServerConfig};
 // Load the posts from the adjacent directory into memory
 fn load_posts() -> anyhow::Result<Vec<Post>> {
     let mut posts = vec![];
+
     let posts_dir = env::current_dir()?.join("posts");
     let posts_iter = fs::read_dir(posts_dir)?;
 
@@ -44,77 +47,91 @@ fn load_posts() -> anyhow::Result<Vec<Post>> {
     Ok(posts)
 }
 
-enum EventMarker {
-    Heading { start: usize, end: usize },
+enum MarkdownState {
+    InHeader(HeadingLevel, String),
+    InCodeblock(String, String),
     Other,
 }
 
 fn process_markdown(markdown: &str) -> anyhow::Result<String> {
-    let mut events = Vec::new();
-    let mut markers = Vec::new();
-
     let options = Options::ENABLE_GFM;
     let parser = TextMergeStream::new(Parser::new_ext(markdown, options));
+    let mut events = Vec::new();
+    let mut state = MarkdownState::Other;
 
-    let mut last_seen_heading = 0;
-
-    for (index, event) in parser.into_iter().enumerate() {
-        match event {
-            Event::Start(Tag::Heading { .. }) => {
-                last_seen_heading = index;
-            }
-            Event::End(TagEnd::Heading(_)) => {
-                markers.push(EventMarker::Heading {
-                    start: last_seen_heading,
-                    end: index,
-                });
-            }
-            _ => {}
-        };
-
-        events.push(event);
+    for event in parser {
+        match &mut state {
+            MarkdownState::Other => match event {
+                Event::Start(Tag::Heading { level, .. }) => {
+                    state = MarkdownState::InHeader(level, String::new());
+                }
+                Event::Start(Tag::CodeBlock(CodeBlockKind::Fenced(lang))) => {
+                    let lang = if lang.is_empty() {
+                        String::from("plaintext")
+                    } else {
+                        lang.to_string()
+                    };
+                    state = MarkdownState::InCodeblock(lang.to_string(), String::new());
+                }
+                Event::Code(code) => {
+                    // Replace regular hyphens with unicode non-breaking hyphens
+                    // https://stackoverflow.com/questions/8753296/how-to-prevent-line-break-at-hyphens-in-all-browsers
+                    events.push(Event::Code(CowStr::from(code.replace('-', "‑"))));
+                }
+                e => {
+                    events.push(e);
+                }
+            },
+            MarkdownState::InHeader(level, contents) => match event {
+                Event::Text(t) => {
+                    *contents += &t;
+                }
+                Event::End(TagEnd::Heading(_)) => {
+                    let id = contents.to_ascii_lowercase().replace(' ', "=");
+                    let href = format!("#{}", &id);
+                    let rewritten = html! {
+                        custom [data_tagname: level.to_string(), id: id] {
+                            a [href: href] {
+                                text(contents);
+                            }
+                        }
+                    }
+                    .to_string();
+                    events.push(Event::Html(CowStr::from(rewritten)));
+                    state = MarkdownState::Other;
+                }
+                _ => panic!("unexpected event in heading: {:?}", event),
+            },
+            MarkdownState::InCodeblock(lang, contents) => match event {
+                Event::Text(t) => {
+                    *contents += &t;
+                }
+                Event::End(TagEnd::CodeBlock) => {
+                    let data_lang = if lang == "plaintext" {
+                        ""
+                    } else {
+                        lang.as_str()
+                    };
+                    let rewritten = html! {
+                        pre [data_lang: data_lang] {
+                            code [class: format!("language-{}", &lang)] {
+                                text(contents);
+                            }
+                        }
+                    }
+                    .to_string();
+                    events.push(Event::Html(CowStr::from(rewritten)));
+                    state = MarkdownState::Other;
+                }
+                _ => panic!("unexpected event in codeblock: {:?}", event),
+            },
+        }
     }
 
-    insert_heading_anchor_links(&mut events, markers.as_ref());
     let mut html = String::new();
     write_html_fmt(&mut html, events.into_iter())?;
+
     Ok(html)
-}
-
-fn insert_heading_anchor_links(events: &mut Vec<Event>, markers: &[EventMarker]) {
-    for marker in markers {
-        let EventMarker::Heading { start, end } = marker else {
-            continue;
-        };
-
-        let Some(heading_events) = events.get((start + 1)..*end) else {
-            panic!("invalid event markers!");
-        };
-
-        let mut heading_text = String::new();
-        for event in heading_events {
-            if let Event::Text(t) = event {
-                heading_text += t.as_ref();
-            }
-        }
-        let normalized = heading_text.replace(' ', "-").to_ascii_lowercase();
-        let anchor = html! {
-            a[href: format!("#{}", &normalized)] {
-                text(heading_text);
-            }
-        };
-        let anchor = Event::Html(CowStr::from(anchor.to_string()));
-
-        // Replaces the heading text with the anchor html
-        events.splice((start + 1)..*end, [anchor]);
-
-        // Updates the heading id
-        let Some(Event::Start(Tag::Heading { id, .. })) = events.get_mut(*start) else {
-            unreachable!();
-        };
-
-        *id = Some(CowStr::from(normalized));
-    }
 }
 
 fn main() -> anyhow::Result<()> {
